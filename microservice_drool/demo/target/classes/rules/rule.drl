@@ -1,0 +1,22 @@
+package rules
+import com.example.demo.pojo.Employee
+import com.example.demo.pojo.TicketPojo
+
+function int testfun(int a) {
+	int a1=a+1;
+	return a1;
+}
+
+rule "rule for testing"
+no-loop true
+when 
+ $t:TicketPojo()
+ $e:Employee(Location==$t.getLocation && priority==testfun(1) ) from $t.empList
+ //Employee(priority>$e.getPriority)
+ then
+ $t.setAssigned($e.getName());
+  System.out.println($e.getName());
+   System.out.println(testfun(1));
+ end
+ 
+
