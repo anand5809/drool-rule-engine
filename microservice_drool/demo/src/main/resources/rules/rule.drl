@@ -20,3 +20,23 @@ when
  end
  
 
+/***********************New*****************************/
+package rules
+
+import com.info.ticket.rule.pojo.Ticket
+import com.info.ticket.rule.pojo.User
+
+dialect 'java'
+
+rule "For Location And Category "
+    dialect "java"
+	when
+    $p:Ticket()
+    $e:User(location==$p.getLocation && department==$p.getCategory) from $p.empList
+    then
+     $p.setAssignee($e.getUsername());
+     $p.setStatus("Assigned");
+    
+  
+end
+/***********************End********************************/
